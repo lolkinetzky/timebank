@@ -1,0 +1,32 @@
+<h1>Listing Requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th>Amount offered</th>
+      <th>Views</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for request <- @requests do %>
+    <tr>
+      <td><%= request.title %></td>
+      <td><%= request.body %></td>
+      <td><%= request.amount_offered %></td>
+      <td><%= request.views %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.trade_request_path(@conn, :show, request) %></span>
+        <span><%= link "Edit", to: Routes.trade_request_path(@conn, :edit, request) %></span>
+        <span><%= link "Delete", to: Routes.trade_request_path(@conn, :delete, request), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Request", to: Routes.trade_request_path(@conn, :new) %></span>

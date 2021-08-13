@@ -222,5 +222,4 @@ defmodule Timebank.Skills do
   defp handle_existing_timelord({:error, changeset}) do
     Repo.get_by!(Timelord, user_id: changeset.data.user_id)
   end
-
 end

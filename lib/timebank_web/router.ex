@@ -24,10 +24,19 @@ defmodule TimebankWeb.Router do
 
   scope "/skills", TimebankWeb.Skills, as: :skills do
     pipe_through [:browser, :authenticate_user]
-    
+
     #do I need to have something here?
 
     resources "/tags", TagController
+  end
+
+  scope "/trade", TimebankWeb.Trade, as: :trade do
+    pipe_through [:browser, :authenticate_user]
+    #^added authenticate user prematurely maybe, might need to add more
+
+    #do I need to have something here?
+
+    resources "/requests", RequestController
   end
 
   defp authenticate_user(conn, _) do

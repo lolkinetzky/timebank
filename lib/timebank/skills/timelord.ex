@@ -3,11 +3,13 @@ defmodule Timebank.Skills.Timelord do
   import Ecto.Changeset
 
   alias Timebank.Skills.Tag
+  alias Timebank.Trade.Request
 
   schema "timelords" do
     field :bank_role, :string
     field :catchphrase, :string
     has_many :tags, Tag
+    has_many :requests, Request
     belongs_to :user, Timebank.Accounts.User
 
 

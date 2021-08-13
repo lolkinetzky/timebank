@@ -1,0 +1,29 @@
+<h1>Show Request</h1>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @request.title %>
+  </li>
+
+  <li>
+    <strong>Body:</strong>
+    <%= @request.body %>
+  </li>
+
+  <li>
+    <strong>Amount offered:</strong>
+    <%= @request.amount_offered %>
+  </li>
+
+  <li>
+   <strong>Created By::</strong>
+   <%= timelord_name(@request) %>
+  </li>
+
+
+</ul>
+
+<span><%= link "Edit", to: Routes.trade_request_path(@conn, :edit, @request) %></span>
+<span><%= link "Back", to: Routes.trade_request_path(@conn, :index) %></span>
