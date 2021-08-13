@@ -1,0 +1,23 @@
+<h1>Show Tag</h1>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @tag.title %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @tag.description %>
+  </li>
+
+  <li>
+   <strong>Created By:</strong>
+   <%= timelord_name(@tag) %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.skills_tag_path(@conn, :edit, @tag) %></span>
+<span><%= link "Back", to: Routes.skills_tag_path(@conn, :index) %></span>
