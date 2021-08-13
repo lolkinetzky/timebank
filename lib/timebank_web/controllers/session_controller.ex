@@ -18,6 +18,7 @@ defmodule TimebankWeb.SessionController do
       {:error, :unauthorized} ->
         conn
         |> put_flash(:error, "Bad email/password combination")
+        #it says this route doesn't work but it worked fine in testing
         |> redirect(to: Routes.session_path(conn, :new))
     end
   end
