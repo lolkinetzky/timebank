@@ -12,6 +12,14 @@ defmodule Timebank.Trade do
   #alias Timebank.Trade.{Request, Timelord}
   #just throwing everything at it to see which one sticks?? lol
 
+  def inc_request_views(%Request{} = request) do
+    {1, [%Request{views: views}]} =
+      from(i in Request, where: i.id == ^request.id, select: [:views])
+      |> Repo.update_all(inc: [views: 1])
+
+    put_in(request.views, views)
+  end
+
   @doc """
   Returns the list of requests.
 

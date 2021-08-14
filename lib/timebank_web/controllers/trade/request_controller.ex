@@ -31,7 +31,11 @@ defmodule TimebankWeb.Trade.RequestController do
   end
 
   def show(conn, %{"id" => id}) do
-    request = Trade.get_request!(id)
+    #request = Trade.get_request!(id)
+    request =
+      id
+      |> Trade.get_request!()
+      |> Trade.inc_request_views()
     render(conn, "show.html", request: request)
   end
 
