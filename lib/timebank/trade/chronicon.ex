@@ -6,7 +6,7 @@ defmodule Timebank.Trade.Chronicon do
 
     #field :from, :id
     belongs_to :from, Timebank.Accounts.User
-    field :to, :id
+    belongs_to :to, Timebank.Accounts.User
     field :time, :float
 
     timestamps()

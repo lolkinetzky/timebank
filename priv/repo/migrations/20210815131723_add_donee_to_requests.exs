@@ -3,8 +3,7 @@ defmodule Timebank.Repo.Migrations.AddDoneeToRequests do
 
   def change do
     alter table(:requests) do
-      add :donee, references(:users, on_delete: :nothing),
-                    null: true
+      add :donee_id, references(:users, on_delete: :nothing)
     end
 
   end

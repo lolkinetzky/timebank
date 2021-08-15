@@ -10,7 +10,8 @@ defmodule Timebank.Trade.Request do
     field :title, :string
     field :views, :integer
     belongs_to :timelord, Timelord
-    #add a "donee" column default to nil
+    belongs_to :donee, Timebank.Accounts.User
+
 
     timestamps()
   end
@@ -20,5 +21,6 @@ defmodule Timebank.Trade.Request do
     request
     |> cast(attrs, [:title, :body, :amount_offered])
     |> validate_required([:title, :body, :amount_offered])
+    #add validating if they have enough money to make request
   end
 end
