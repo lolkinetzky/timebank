@@ -21,7 +21,7 @@ defmodule Timebank.Trade.Batch do
 
   defp veri_time_balance(transfer_amount) do
     fn _repo, %{retrieve_accounts_step: {acc_a, acc_b}} ->
-      if acc_a.balance < transfer_amount,
+      if acc_b.balance < transfer_amount,
         do: {:error, :balance_too_low},
         else: {:ok, {acc_a, acc_b, transfer_amount}}
     end
@@ -43,7 +43,7 @@ defmodule Timebank.Trade.Batch do
   def trade(%Request{timelord_id: acc1_id, donee_id: donee_account, amount_offered: amount} = _request) do
     %{user_id: timelord_account} = Timebank.Skills.get_timelord!(acc1_id)
     Multi.new()
-    |> Multi.insert(:chronicon, %Chronicon{from: timelord_account, to: donee_account, time: amount})
+    |> Multi.insert(:chronicon, %Chronicon{from_id: timelord_account, to_id: donee_account, time: amount})
     |> Multi.run(:retrieve_accounts_step, retrieve_accounts(timelord_account, donee_account))
     |> Multi.run(:verify_balances_step, veri_time_balance(amount))
     |> Multi.run(:subtract_from_a_step, &subtract_from_a/2)

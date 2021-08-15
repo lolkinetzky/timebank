@@ -19,8 +19,8 @@ defmodule Timebank.Accounts.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:name, :username, :balance])
-    |> validate_number(:balance, greater_than_or_equal_to: 0)
     |> validate_required([:name, :username, :balance])
+    |> validate_number(:balance, greater_than_or_equal_to: 0)
     |> unique_constraint(:username)
   end
 end
