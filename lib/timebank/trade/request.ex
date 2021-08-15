@@ -10,6 +10,7 @@ defmodule Timebank.Trade.Request do
     field :title, :string
     field :views, :integer
     belongs_to :timelord, Timelord
+    #add a "donee" column default to nil
 
     timestamps()
   end

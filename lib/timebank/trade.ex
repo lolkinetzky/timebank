@@ -141,4 +141,101 @@ defmodule Timebank.Trade do
   def change_request(%Request{} = request, attrs \\ %{}) do
     Request.changeset(request, attrs)
   end
+
+  alias Timebank.Trade.Chronicon
+
+  @doc """
+  Returns the list of chronicon.
+
+  ## Examples
+
+      iex> list_chronicon()
+      [%Chronicon{}, ...]
+
+  """
+  def list_chronicon do
+    Repo.all(Chronicon)
+  end
+
+  @doc """
+  Gets a single chronicon.
+
+  Raises `Ecto.NoResultsError` if the Chronicon does not exist.
+
+  ## Examples
+
+      iex> get_chronicon!(123)
+      %Chronicon{}
+
+      iex> get_chronicon!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_chronicon!(id), do: Repo.get!(Chronicon, id)
+
+  @doc """
+  Creates a chronicon.
+
+  ## Examples
+
+      iex> create_chronicon(%{field: value})
+      {:ok, %Chronicon{}}
+
+      iex> create_chronicon(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_chronicon(attrs \\ %{}) do
+    %Chronicon{}
+    |> Chronicon.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a chronicon.
+
+  ## Examples
+
+      iex> update_chronicon(chronicon, %{field: new_value})
+      {:ok, %Chronicon{}}
+
+      iex> update_chronicon(chronicon, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_chronicon(%Chronicon{} = chronicon, attrs) do
+    chronicon
+    |> Chronicon.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a chronicon.
+
+  ## Examples
+
+      iex> delete_chronicon(chronicon)
+      {:ok, %Chronicon{}}
+
+      iex> delete_chronicon(chronicon)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_chronicon(%Chronicon{} = chronicon) do
+    Repo.delete(chronicon)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking chronicon changes.
+
+  ## Examples
+
+      iex> change_chronicon(chronicon)
+      %Ecto.Changeset{data: %Chronicon{}}
+
+  """
+  def change_chronicon(%Chronicon{} = chronicon, attrs \\ %{}) do
+    Chronicon.changeset(chronicon, attrs)
+  end
+
 end
