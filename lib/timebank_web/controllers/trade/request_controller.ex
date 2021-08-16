@@ -5,7 +5,7 @@ defmodule TimebankWeb.Trade.RequestController do
   alias Timebank.Trade.Request
 
   plug :require_existing_timelord2
-  plug :authorize_request when action in [:edit, :update, :delete]
+  plug :authorize_request #when action in [:edit, :update, :delete]
 
   def index(conn, _params) do
     requests = Trade.list_requests()
@@ -23,7 +23,8 @@ defmodule TimebankWeb.Trade.RequestController do
       {:ok, request} ->
         conn
         |> put_flash(:info, "Request created successfully.")
-        |> redirect(to: Routes.trade_request_path(conn, :show, request))
+        |> redirect(to: Routes.trade_request_path(conn, :show, request)) #redirect my to index instead of show
+                      # Routes.my_time_path(conn, :index, request))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

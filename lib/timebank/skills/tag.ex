@@ -3,11 +3,13 @@ defmodule Timebank.Skills.Tag do
   import Ecto.Changeset
 
   alias Timebank.Skills.Timelord
+  alias Timebank.Trade.Request
 
   schema "tags" do
     field :description, :string
     field :title, :string
     belongs_to :timelord, Timelord
+    has_many :requests, Request
 
     timestamps()
   end

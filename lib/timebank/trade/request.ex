@@ -2,7 +2,7 @@ defmodule Timebank.Trade.Request do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Timebank.Skills.Timelord
+  alias Timebank.Skills.{Timelord,Tag}
 
   schema "requests" do
     field :amount_offered, :float
@@ -11,7 +11,7 @@ defmodule Timebank.Trade.Request do
     field :views, :integer
     belongs_to :timelord, Timelord
     belongs_to :donee, Timebank.Accounts.User
-
+    belongs_to :skill, Tag
 
     timestamps()
   end
