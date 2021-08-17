@@ -9,6 +9,8 @@ defmodule Timebank.Accounts.User do
     field :name, :string
     field :username, :string
     field :balance, :float
+    has_one :timelord, Timebank.Skills.Timelord
+    has_many :requests, Timebank.Trade.Request, foreign_key: :donee_id
     has_one :credential, Credential
     has_many :trades, Timebank.Trade.Chronicon
 

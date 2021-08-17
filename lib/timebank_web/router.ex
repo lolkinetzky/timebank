@@ -19,6 +19,10 @@ defmodule TimebankWeb.Router do
     resources "/users", UserController
     resources "/sessions", SessionController, only: [:new, :create, :delete],
                                               singleton: true
+  end
+
+  scope "/", TimebankWeb do
+    pipe_through [:browser, :authenticate_user]
     resources "/opportunities", OpportunitiesController
     resources "/mytime", MytimeController
   end

@@ -9,8 +9,9 @@ defmodule Timebank.Trade do
   alias Timebank.Trade.Request
   alias Timebank.Skills.Timelord
   alias Timebank.Accounts
-  #alias Timebank.Trade.{Request, Timelord}
-  #just throwing everything at it to see which one sticks?? lol
+  alias Timebank.Accounts.User
+  # alias Timebank.Trade.{Request, Timelord}
+  # just throwing everything at it to see which one sticks?? lol
 
   def inc_request_views(%Request{} = request) do
     {1, [%Request{views: views}]} =
@@ -34,23 +35,57 @@ defmodule Timebank.Trade do
   #   |> Repo.all()
   #   |> Repo.preload(timelord: [user: :credential])
   # end
+  # def ecto_query_authored_request() do
+  #   query =
+  #     from skill_request in Request,
+  #       inner_join: user in assoc(skill_request, :user),
+  #       where: user.id == ^user_id
 
-  def list_requests(opts \\ []) do
+  #   case Repo.all(query) do
+  #     %User{} = user -> {:ok, user}
+  #     nil -> {:error, "Nothing here. Try authoring a skill request."}
+  #   end
+  # end
+  def list_requests do
     Request
-    |> TokenOperator.maybe(opts, :filter, authored_requests: \
-    &authored_requests/1, user_donee: &user_donee/1)
     |> Repo.all()
     |> Repo.preload(timelord: [user: :credential])
   end
 
-  defp authored_requests(query, %{User: user}) do
-    from(r in query, where: r.timelord_id) #need to say when the id matches current user, how to get the connection?
+  def list_my_requests(user) do
+    user = User
+          |> Repo.get!(user.id)
+          |> Repo.preload(timelord: [:requests])
+    user.timelord.requests
   end
 
-  defp user_donee(query) do
-    from(r in query, where: r.donee_id)
+  def list_my_work(user) do
+    user = User
+          |> Repo.get!(user.id)
+          |> Repo.preload(:requests)
+    user.requests
   end
 
+  # def list_requests(opts \\ []) do
+  #   Request
+  #   |> TokenOperator.maybe(opts, :filter,
+  #     authored_requests: &authored_requests/2,
+  #     user_donee: &user_donee/2
+  #   )
+  #   |> Repo.all()
+  #   #|> Repo.preload(timelord: [user: :credential])
+  # end
+
+  # defp authored_requests(query, %{filter: %{user_id: user_id}}) do
+  #   timelord = Repo.get Timelord, where: [user_id: user_id]
+  #   #|> Repo.all Ecto.assoc(timelord, :requests)
+  #   from query, where: [timelord_id: ^timelord.id]
+  # end
+
+  # defp user_donee(query, %{filter: %{user_id: donee_id}}) do
+  #   from query, where: [donee_id: ^donee_id]
+  #   #|> Repo.all()
+  # end
 
   @doc """
   Gets a single request.
@@ -70,7 +105,6 @@ defmodule Timebank.Trade do
     Request
     |> Repo.get!(id)
     |> Repo.preload(timelord: [user: :credential])
-
   end
 
   def get_timelord!(id) do
@@ -78,7 +112,6 @@ defmodule Timebank.Trade do
     |> Repo.get!(id)
     |> Repo.preload(user: :credential)
   end
-
 
   @doc """
   Creates a request.
@@ -92,22 +125,25 @@ defmodule Timebank.Trade do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_request(%Timelord{} = timelord, attrs \\ %{}) do #expanded struct b/c errors. will see if causes more issues.
+  # expanded struct b/c errors. will see if causes more issues.
+  def create_request(%Timelord{} = timelord, attrs \\ %{}) do
     %Request{}
     |> Request.changeset(attrs)
     |> Ecto.Changeset.put_change(:timelord_id, timelord.id)
     |> Repo.insert()
   end
 
-
   def ensure_timelord_exists(%Accounts.User{} = user) do
-    %Timelord{user_id: user.id} #expanded struct b/c errors. will see if causes more issues.
+    # expanded struct b/c errors. will see if causes more issues.
+    %Timelord{user_id: user.id}
     |> Ecto.Changeset.change()
     |> Ecto.Changeset.unique_constraint(:user_id)
     |> Repo.insert()
     |> handle_existing_timelord()
   end
+
   defp handle_existing_timelord({:ok, timelord}), do: timelord
+
   defp handle_existing_timelord({:error, changeset}) do
     Repo.get_by!(Timelord, user_id: changeset.data.user_id)
   end
@@ -254,5 +290,4 @@ defmodule Timebank.Trade do
   def change_chronicon(%Chronicon{} = chronicon, attrs \\ %{}) do
     Chronicon.changeset(chronicon, attrs)
   end
-
 end

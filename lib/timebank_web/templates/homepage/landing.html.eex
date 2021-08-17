@@ -1,42 +1,40 @@
 <section class="phx-hero">
   <h1>Welcome, <%= @current_user.name %></h1>
+  <p>You have <%= @current_user.balance %> hours banked</p>
 </section>
 
-<section class="row">
+<section class="flex justify-evenly">
   <article class="column">
-    <h2>My Time</h2>
+    <h2>my Time</h2>
     <ul>
       <li>
-        <%= link "My Time", to: Routes.trade_request_path(@conn, :index) %>
-      </li>
-      <li>
-        <%= link "My Skill Requests", to: Routes.trade_request_path(@conn, :index) %>
-      </li>
-      <li>
-        <%= link "Make New Request", to: Routes.trade_request_path(@conn, :new) %>
+        <%= link "My requests", to: Routes.mytime_path(@conn, :index) %></li>
+
+
+        <li><%= link "My work", to: Routes.trade_request_path(@conn, :index) %></li>
       </li>
     </ul>
   </article>
   <article class="column">
-    <h2>My Opportunities</h2>
-    <ul>
-      <li>
-        <a href="">Requests for my Skills</a>
-      </li>
-      <li>
-        <a href="">All Skill Requests</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>My Skills</h2>
+    <h2>my Opportunities</h2>
     <ul>
       <li>
 
-        <a href="">Add my Skills</a>
+        <span><%= link "Requests of my Skills", to: Routes.trade_request_path(@conn, :new) %></span>
       </li>
       <li>
-        <a href="">All Skills Present in Bank </a>
+
+        <%= link "All Community Requests", to: Routes.trade_request_path(@conn, :index) %></li>
+      </li>
+    </ul>
+  </article>
+  <article class="column">
+    <h2>my Skills</h2>
+    <ul>
+      <li>
+        <%= link "Add my Skills", to: Routes.skills_tag_path(@conn, :new) %></li>
+
+        <li><%= link "Community skills", to: Routes.skills_tag_path(@conn, :create) %></li>
       </li>
     </ul>
   </article>

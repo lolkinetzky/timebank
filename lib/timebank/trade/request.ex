@@ -1,10 +1,10 @@
 defmodule Timebank.Trade.Request do
   use Ecto.Schema
   import Ecto.Changeset
-  import Ecto.Query
+
 
   alias Timebank.Skills.{Timelord,Tag}
-  alias Timebank.Trade.Request
+
 
   schema "requests" do
     field :amount_offered, :float

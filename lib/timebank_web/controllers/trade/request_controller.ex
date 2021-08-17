@@ -5,11 +5,10 @@ defmodule TimebankWeb.Trade.RequestController do
   alias Timebank.Trade.Request
 
   plug :require_existing_timelord2
-  plug :authorize_request #when action in [:edit, :update, :delete]
+  plug :authorize_request when action in [:edit, :update, :delete]
 
   def index(conn, _params) do
-    requests = Trade.list_requests()
-    render(conn, "index.html", requests: requests)
+    render(conn, "index.html", requests: Trade.list_requests())
   end
 
   def new(conn, _params) do

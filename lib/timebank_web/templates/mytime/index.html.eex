@@ -1,11 +1,6 @@
  <h1>My Time</h1>
  <article class="column">
-  <h2>Requests<h2>
-    <ul>
-      <li>
-        <%= link "Make New Request", to: Routes.trade_request_path(@conn, :new) %>
-      </li>
-      <li>
+  
         <table>
   <thead>
     <tr>
@@ -18,7 +13,7 @@
     </tr>
   </thead>
   <tbody>
-<%= for request <- @requests do %>
+<%= for request <- @my_requests do %>
     <tr>
       <td><%= request.title %></td>
       <td><%= request.body %></td>
@@ -53,16 +48,14 @@
     </tr>
   </thead>
   <tbody>
-<%= for request <- @requests do %>
+<%= for request <- @my_work do %>
     <tr>
       <td><%= request.title %></td>
       <td><%= request.body %></td>
       <td><%= request.amount_offered %></td>
-
-
       <td>
         <span><%= link "Show", to: Routes.trade_request_path(@conn, :show, request) %></span>
-        <span><%= link "Completed", to: Routes.trade_request_path(@conn, :work_donee, request) %></span>
+        <span><%= link "Completed", to: Routes.trade_request_path(@conn, :show, request) %></span>
       </td>
     </tr>
 <% end %>
