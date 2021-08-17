@@ -1,0 +1,43 @@
+<section class="phx-hero">
+  <h1>Welcome, <%= @current_user.name %></h1>
+</section>
+
+<section class="row">
+  <article class="column">
+    <h2>My Time</h2>
+    <ul>
+      <li>
+        <%= link "My Time", to: Routes.trade_request_path(@conn, :index) %>
+      </li>
+      <li>
+        <%= link "My Skill Requests", to: Routes.trade_request_path(@conn, :index) %>
+      </li>
+      <li>
+        <%= link "Make New Request", to: Routes.trade_request_path(@conn, :new) %>
+      </li>
+    </ul>
+  </article>
+  <article class="column">
+    <h2>My Opportunities</h2>
+    <ul>
+      <li>
+        <a href="">Requests for my Skills</a>
+      </li>
+      <li>
+        <a href="">All Skill Requests</a>
+      </li>
+    </ul>
+  </article>
+  <article class="column">
+    <h2>My Skills</h2>
+    <ul>
+      <li>
+
+        <a href="">Add my Skills</a>
+      </li>
+      <li>
+        <a href="">All Skills Present in Bank </a>
+      </li>
+    </ul>
+  </article>
+</section>

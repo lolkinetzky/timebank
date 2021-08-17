@@ -1,4 +1,4 @@
-defmodule TimebankWeb.PageController do
+defmodule TimebankWeb.HomepageController do
   use TimebankWeb, :controller
 
   def index(conn, _params) do

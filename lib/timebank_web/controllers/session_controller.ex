@@ -14,11 +14,10 @@ defmodule TimebankWeb.SessionController do
         |> put_flash(:info, "Welcome back!")
         |> put_session(:user_id, user.id)
         |> configure_session(renew: true)
-        |> redirect(to: "/")
+        |> redirect(to: "/welcome/home")
       {:error, :unauthorized} ->
         conn
         |> put_flash(:error, "Bad email/password combination")
-        #it says this route doesn't work but it worked fine in testing
         |> redirect(to: Routes.session_path(conn, :new))
     end
   end

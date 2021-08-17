@@ -1,0 +1,28 @@
+<h1>All Opportunities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th>Amount offered</th>
+      <th>Views</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for request <- @requests do %>
+    <tr>
+      <td><%= request.title %></td>
+      <td><%= request.body %></td>
+      <td><%= request.amount_offered %></td>
+      <td><%= request.views %></td>
+
+      <td>
+        <span><%= link "Offer Your Time", to: Routes.trade_request_path(@conn, :add_response, request) %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

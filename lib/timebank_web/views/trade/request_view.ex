@@ -7,4 +7,5 @@ defmodule TimebankWeb.Trade.RequestView do
     timelord.user.name
   end
 
+  
 end

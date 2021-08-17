@@ -15,27 +15,36 @@ defmodule TimebankWeb.Router do
 
   scope "/", TimebankWeb do
     pipe_through :browser
-
-    get "/", PageController, :index
+    get "/", HomepageController, :index
     resources "/users", UserController
     resources "/sessions", SessionController, only: [:new, :create, :delete],
                                               singleton: true
+    resources "/opportunities", OpportunitiesController
+    resources "/mytime", MytimeController
   end
+
+  scope "/welcome", TimebankWeb do
+    pipe_through [:browser, :authenticate_user]
+    get "/home", HomepageController, :landing
+  end
+
+  # scope "/opportunities", TimebankWeb do
+  #   pipe_through [:browser, :authenticate_user]
+  #   resources "/opportunities", OpportunitiesController
+  # end
+
+  # scope "/mytime", TimebankWeb do
+  #   pipe_through [:browser, :authenticate_user]
+  #   resources "/mytime", MytimeController
+  # end
 
   scope "/skills", TimebankWeb.Skills, as: :skills do
     pipe_through [:browser, :authenticate_user]
-
-    #do I need to have something here?
-
     resources "/tags", TagController
   end
 
   scope "/trade", TimebankWeb.Trade, as: :trade do
     pipe_through [:browser, :authenticate_user]
-    #^added authenticate user prematurely maybe, might need to add more
-
-    #do I need to have something here?
-
     resources "/requests", RequestController
   end
 
