@@ -1,12 +1,9 @@
 /* This file is for your main application css. */
-@tailwind base;
-
-@tailwind components;
-
-@tailwind utilities;
-
 @import "./phoenix.css";
 
+a {
+  color: #590f025d;
+}
 
 
 /* Alerts and form errors */
@@ -43,7 +40,4 @@
   margin: -1rem 0 2rem;
 }
 
-.link-text {
-  color: #791402;
 
-}

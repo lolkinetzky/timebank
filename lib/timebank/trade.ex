@@ -29,11 +29,28 @@ defmodule Timebank.Trade do
       [%Request{}, ...]
 
   """
-  def list_requests do
+  # def list_requests do
+  #   Request
+  #   |> Repo.all()
+  #   |> Repo.preload(timelord: [user: :credential])
+  # end
+
+  def list_requests(opts \\ []) do
     Request
+    |> TokenOperator.maybe(opts, :filter, authored_requests: \
+    &authored_requests/1, user_donee: &user_donee/1)
     |> Repo.all()
     |> Repo.preload(timelord: [user: :credential])
   end
+
+  defp authored_requests(query, %{User: user}) do
+    from(r in query, where: r.timelord_id) #need to say when the id matches current user, how to get the connection?
+  end
+
+  defp user_donee(query) do
+    from(r in query, where: r.donee_id)
+  end
+
 
   @doc """
   Gets a single request.
