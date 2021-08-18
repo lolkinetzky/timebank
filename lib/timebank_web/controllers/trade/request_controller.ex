@@ -17,21 +17,17 @@ defmodule TimebankWeb.Trade.RequestController do
   end
 
   def create(conn, %{"request" => request_params}) do
-    #  case Trade.create_request(request_params) do
     case Trade.create_request(conn.assigns.current_timelord, request_params) do
       {:ok, request} ->
         conn
         |> put_flash(:info, "Request created successfully.")
-        |> redirect(to: Routes.trade_request_path(conn, :show, request)) #redirect my to index instead of show
-                      # Routes.my_time_path(conn, :index, request))
-
+        |> redirect(to: Routes.trade_request_path(conn, :show, request)) #redirect my to index instead of show?
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
 
   def show(conn, %{"id" => id}) do
-    #request = Trade.get_request!(id)
     request =
       id
       |> Trade.get_request!()
@@ -39,19 +35,12 @@ defmodule TimebankWeb.Trade.RequestController do
     render(conn, "show.html", request: request)
   end
 
-  # def edit(conn, %{"id" => id}) do
   def edit(conn, _) do
     changeset = Trade.change_request(conn.assigns.request)
     render(conn, "edit.html", changeset: changeset)
-    #  request = Trade.get_request!(id)
-    #  changeset = Trade.change_request(request)
-    #  render(conn, "edit.html", request: request, changeset: changeset)
   end
 
-  # def update(conn, %{"id" => id, "request" => request_params}) do
   def update(conn, %{"request" => request_params}) do
-    # request = Trade.get_request!(id)
-    # case Trade.update_request(request, request_params) do
     case Trade.update_request(conn.assigns.request, request_params) do
       {:ok, request} ->
         conn
@@ -59,15 +48,11 @@ defmodule TimebankWeb.Trade.RequestController do
         |> redirect(to: Routes.trade_request_path(conn, :show, request))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        # render(conn, "edit.html", request: request, changeset: changeset)
         render(conn, "edit.html", changeset: changeset)
     end
   end
 
-  # def delete(conn, %{"id" => id}) do
   def delete(conn, _) do
-    # request = Trade.get_request!(id)
-    # {:ok, _request} = Trade.delete_request(request)
     {:ok, _request} = Trade.delete_request(conn.assigns.request)
 
     conn
@@ -85,7 +70,6 @@ defmodule TimebankWeb.Trade.RequestController do
     |> redirect(to: Routes.trade_request_path(conn, :show, request))
   end
 
-  # do I need to rename this function since it also exists in skills?
   defp require_existing_timelord2(conn, _) do
     timelord = Timebank.Trade.ensure_timelord_exists(conn.assigns.current_user)
     assign(conn, :current_timelord, timelord)

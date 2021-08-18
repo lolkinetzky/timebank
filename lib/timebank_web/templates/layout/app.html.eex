@@ -16,7 +16,6 @@
           <ul>
               <li><%= link "login::::leave", to: Routes.session_path(@conn, :new) %></li>
               <%= link "Skill Request", to: Routes.trade_request_path(@conn, :new) %>
-              
           </ul>
         </nav>
         <a href="http://localhost:4000/welcome/home" class="phx-logo">

@@ -5,7 +5,6 @@ defmodule Timebank.Trade.Batch do
 
   alias Timebank.Repo
   alias Timebank.Accounts.User
-  alias Timebank.Trade
   alias Timebank.Trade.Chronicon
   alias Timebank.Trade.Request
 
@@ -50,73 +49,4 @@ defmodule Timebank.Trade.Batch do
     |> Multi.run(:add_to_b_step, &add_to_b/2)
     |> Repo.transaction()
   end
-
-
-
-
-
-
-
-
-
-
-  # alias Timebank.Repo
-
-  # need to capture the session id for aac1_id and offer user's id for acc2_id,
-  # as well as the "amount" from the trade request.
-  # ...where to do that? I think in the request controller.
-  # playing with some trash functions at the bottom
-
-  # def transfer_time(acc1_id, acc2_id, amount) do
-  #   Multi.new()
-  #   |> Multi.run(:retrieve_accounts_step, retrieve_accounts(acc1_id, acc2_id))
-  #   |> Multi.run(:verify_balances_step, veri_time_balance(amount))
-  #   |> Multi.run(:subtract_from_a_step, &subtract_from_a/2)
-  #   |> Multi.run(:add_to_b_step, &add_to_b/2)
-  # end
-
-
-
-  #############################
-  # error for below syntax error:
-  #   Ecto.Multi.run(%Ecto.Multi{:names => MapSet.t(_), :operations => []}, :clear_request, (() -> any())) ::
-  #   :ok
-  # def a() do
-  #   :ok
-  # end
-
-  # will never return since the success typing is:
-  # (%Ecto.Multi{:names => MapSet.t(_), :operations => _, _ => _}, any(), (_, _ -> any())) ::
-  #   %Ecto.Multi{:names => MapSet.t(_), :operations => nonempty_maybe_improper_list(), _ => _}
-
-  # and the contract is
-  # (t(), name(), run()) :: t()
-
-  # def clear_completed_request(%Request{} = request) do
-  #   trade_delete_request = fn ->
-  #     Trade.delete_request(request)
-  #   end
-  #   Multi.new()
-  #   |> Multi.run(:clear_request, trade_delete_request)
-  # end
-
-  # # created a "donee" column in request, default nil. if it is updated to get a user id, trigger this:
-  # def persist_trade(
-  #       %Request{timelord_id: acc1_id, donee: acc2_id, amount_offered: amount} = request
-  #     ) do
-  #   # Request{amount, amount_offered: amount, _body, _title, _views, _timelord_id} = amount
-  #   transfer = transfer_time(acc1_id, acc2_id, amount)
-  #   remove_req = clear_completed_request(request)
-
-  #   Multi.new()
-  #   |> Multi.insert(:chronicon, %Chronicon{from: acc1_id, to: acc2_id, time: amount})
-  #   # Chronicon.changeset(%{from: params["timelord_id"], to: params["donee"], time: params["amount_offered"]}))
-  #   # multi will automatically rollback if below doesn't work, right?
-  #   |> Multi.append(transfer)
-  #   |> Multi.append(remove_req)
-  #   |> Repo.transaction()
-  # end
-
-
-
 end

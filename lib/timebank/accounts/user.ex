@@ -1,9 +1,7 @@
 defmodule Timebank.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-
   alias Timebank.Accounts.Credential
-
 
   schema "users" do
     field :name, :string

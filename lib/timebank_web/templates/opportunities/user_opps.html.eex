@@ -1,5 +1,4 @@
 <h1>Opportunities for <%= @current_user.name %></h1>
-
 <table>
   <thead>
     <tr>
@@ -7,7 +6,6 @@
       <th>Body</th>
       <th>Amount offered</th>
       <th>Views</th>
-
       <th></th>
     </tr>
   </thead>
@@ -18,7 +16,6 @@
       <td><%= request.body %></td>
       <td><%= request.amount_offered %></td>
       <td><%= request.views %></td>
-
       <td>
         <span><%= link "Offer Your Time", to: Routes.trade_request_path(@conn, :add_response, request) %></span>
       </td>

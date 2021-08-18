@@ -1,6 +1,5 @@
  <h2><%= @current_user.name%>|> Skill Requests</h2>
  <article class="column">
-
         <table>
   <thead>
     <tr>
@@ -9,7 +8,6 @@
       <th>Time </th>
       <th>Views</th>
       <th>Offers</th>
-
       <th></th>
     </tr>
   </thead>
@@ -21,9 +19,7 @@
       <td><%= request.amount_offered %></td>
       <td><%= request.views %></td>
       <td><%= request.views %></td>
-
       <td>
-        
         <span><%= link "Edit", to: Routes.trade_request_path(@conn, :edit, request) %></span>
         <span><%= link "Delete", to: Routes.trade_request_path(@conn, :delete, request), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
@@ -34,7 +30,6 @@
       </li>
     </ul>
   </article>
-
 <h2><%= @current_user.name %>|> Skill Trades<h2>
 <ul>
         <table>
@@ -43,8 +38,6 @@
       <th>Title</th>
       <th>Body</th>
       <th>Time</th>
-
-
       <th></th>
     </tr>
   </thead>
@@ -55,7 +48,6 @@
       <td><%= request.body %></td>
       <td><%= request.amount_offered %></td>
       <td>
-
       </td>
     </tr>
 <% end %>

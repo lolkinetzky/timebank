@@ -36,7 +36,6 @@ defmodule TimebankWeb.Skills.TagController do
   end
 
   def create(conn, %{"tag" => tag_params}) do
-    #case Skills.create_tag(tag_params) do
     case Skills.create_tag(conn.assigns.current_timelord, tag_params) do
       {:ok, tag} ->
         conn
@@ -53,19 +52,12 @@ defmodule TimebankWeb.Skills.TagController do
     render(conn, "show.html", tag: tag)
   end
 
-  #def edit(conn, %{"id" => id}) do
   def edit(conn, _) do
     changeset = Skills.change_tag(conn.assigns.tag)
     render(conn, "edit.html", changeset: changeset)
-    #tag = Skills.get_tag!(id)
-    #changeset = Skills.change_tag(tag)
-    #render(conn, "edit.html", tag: tag, changeset: changeset)
   end
 
-  #def update(conn, %{"id" => id, "tag" => tag_params}) do
   def update(conn, %{"tag" => tag_params}) do
-    #tag = Skills.get_tag!(id)
-    #case Skills.update_tag(tag, tag_params) do
     case Skills.update_tag(conn.assigns.tag, tag_params) do
       {:ok, tag} ->
         conn
@@ -74,14 +66,10 @@ defmodule TimebankWeb.Skills.TagController do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", changeset: changeset)
-        #render(conn, "edit.html", tag: tag, changeset: changeset)
     end
   end
 
-  #def delete(conn, %{"id" => id}) do
   def delete(conn, _) do
-    #tag = Skills.get_tag!(id)
-    #{:ok, _tag} = Skills.delete_tag(tag)
     {:ok, _tag} = Skills.delete_tag(conn.assigns.tag)
 
     conn

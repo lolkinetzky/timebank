@@ -6,30 +6,23 @@
   <img class= "row object-center" src="https://giffiles.alphacoders.com/417/4176.gif" alt=Trippybidness />
   <div class= "row">.</div>
 </section>
-
 <br><br>
-
 <section class="flex justify-evenly">
   <article class="column">
     <h2>my Time</h2>
     <ul>
       <li>
         <%= link "My requests", to: Routes.mytime_path(@conn, :index) %></li>
-
-
         <li><%= link "My work", to: Routes.mytime_path(@conn, :index) %></li>
-
     </ul>
   </article>
   <article class="column">
     <h2>my Opportunities</h2>
     <ul>
       <li>
-
         <span><%= link "Requests of my Skills", to: Routes.trade_request_path(@conn, :new) %></span>
       </li>
       <li>
-
         <%= link "All Community Requests", to: Routes.trade_request_path(@conn, :index) %></li>
       </li>
     </ul>
@@ -37,10 +30,8 @@
   <article class="column">
     <h2>my Skills</h2>
     <ul>
-      <li>
-        <%= link "Add my Skills", to: Routes.skills_tag_path(@conn, :new) %></li>
-
-        <li><%= link "Community skills", to: Routes.skills_tag_path(@conn, :create) %></li>
+      <li><%= link "Add my Skills", to: Routes.skills_tag_path(@conn, :new) %></li>
+      <li><%= link "Community skills", to: Routes.skills_tag_path(@conn, :create) %></li>
       </li>
     </ul>
   </article>
