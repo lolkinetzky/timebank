@@ -1,5 +1,14 @@
-<h1>New Skill Tag</h1>
+<h1>Submit a new Skill</h1>
+
+The skill you submit here should be a single skill that you posess: include a short title of your skill and brief description for clarity or specifics.
+You can also try searching the Community "skill tags" to tag yourself with the same skill another member has posted. You can tag yourself with and author
+as many skill tags as you'd like to.
+
+
+<section class= "phx-hero">
 
 <%= render "form.html", Map.put(assigns, :action, Routes.skills_tag_path(@conn, :create)) %>
 
-<span><%= link "Back", to: Routes.skills_tag_path(@conn, :index) %></span>
+</section>
+
+<span><%= link "Community Skills", to: Routes.skills_tag_path(@conn, :index) %></span>

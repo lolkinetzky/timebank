@@ -1,7 +1,13 @@
 <section class="phx-hero">
-  <h1>Welcome, <%= @current_user.name %></h1>
-  <p>You have <%= @current_user.balance %> hours banked</p>
+  <h1 class= "text-7xl">Hi again, <%= @current_user.name %></h1>
+  my Banked time: <%= @current_user.balance %> hours<br><br>
+<section class= "row">
+  <div class= "row">.</div>
+  <img class= "row object-center" src="https://giffiles.alphacoders.com/417/4176.gif" alt=Trippybidness />
+  <div class= "row">.</div>
 </section>
+
+<br><br>
 
 <section class="flex justify-evenly">
   <article class="column">
