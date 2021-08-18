@@ -27,3 +27,5 @@
 
 <span><%= link "Edit", to: Routes.trade_request_path(@conn, :edit, @request) %></span>
 <span><%= link "Back", to: Routes.trade_request_path(@conn, :index) %></span>
+
+

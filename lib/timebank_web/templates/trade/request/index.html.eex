@@ -1,4 +1,4 @@
-<h1>Listing Requests</h1>
+<h1>Communituy Skill Requests</h1>
 
 <table>
   <thead>
@@ -28,5 +28,3 @@
 <% end %>
   </tbody>
 </table>
-
-<span><%= link "New Request", to: Routes.trade_request_path(@conn, :new) %></span>

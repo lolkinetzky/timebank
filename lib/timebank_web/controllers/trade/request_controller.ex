@@ -75,6 +75,16 @@ defmodule TimebankWeb.Trade.RequestController do
     |> redirect(to: Routes.trade_request_path(conn, :index))
   end
 
+  def initiate_trade(conn, %{"donee_id" => _id}) do
+    request = %Request{}
+    # TODO: assign donee to request
+    Timebank.Trade.Batch.trade(request)
+
+    conn
+    |> put_flash(:info, "Trade initiated: time has been transferred.")
+    |> redirect(to: Routes.trade_request_path(conn, :show, request))
+  end
+
   # do I need to rename this function since it also exists in skills?
   defp require_existing_timelord2(conn, _) do
     timelord = Timebank.Trade.ensure_timelord_exists(conn.assigns.current_user)

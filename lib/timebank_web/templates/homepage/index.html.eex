@@ -1,7 +1,17 @@
-<section>
-<h2>Resources</h2>
-  <article class="row">
 
+<div class="phx-hero container justify-center">
+<div class="text-5xl underline tracking-widest"><%= link "Become a Member", to: Routes.user_path(@conn, :new) %></div>
+
+</div>
+
+
+
+
+
+<section class="phx-hero">
+<h2>Resources</h2>
+
+  <article class="footer">
     <ul>
       <li>
         <a href="">Timebank &amp; Holacracy</a>

@@ -50,6 +50,7 @@ defmodule TimebankWeb.Router do
   scope "/trade", TimebankWeb.Trade, as: :trade do
     pipe_through [:browser, :authenticate_user]
     resources "/requests", RequestController
+    post "/requests/:id/by/:donee_id", RequestController, :initiate_trade
   end
 
   defp authenticate_user(conn, _) do

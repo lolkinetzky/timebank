@@ -11,8 +11,8 @@
         <%= link "My requests", to: Routes.mytime_path(@conn, :index) %></li>
 
 
-        <li><%= link "My work", to: Routes.trade_request_path(@conn, :index) %></li>
-      </li>
+        <li><%= link "My work", to: Routes.mytime_path(@conn, :index) %></li>
+
     </ul>
   </article>
   <article class="column">

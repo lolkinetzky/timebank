@@ -21,7 +21,7 @@ defmodule Timebank.Trade.Batch do
 
   defp veri_time_balance(transfer_amount) do
     fn _repo, %{retrieve_accounts_step: {acc_a, acc_b}} ->
-      if acc_b.balance < transfer_amount,
+      if acc_a.balance < transfer_amount, #was acc b balance
         do: {:error, :balance_too_low},
         else: {:ok, {acc_a, acc_b, transfer_amount}}
     end

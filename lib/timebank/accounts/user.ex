@@ -8,7 +8,7 @@ defmodule Timebank.Accounts.User do
   schema "users" do
     field :name, :string
     field :username, :string
-    field :balance, :float
+    field :balance, :float, default: 0.0
     has_one :timelord, Timebank.Skills.Timelord
     has_many :requests, Timebank.Trade.Request, foreign_key: :donee_id
     has_one :credential, Credential
@@ -21,7 +21,7 @@ defmodule Timebank.Accounts.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:name, :username, :balance])
-    |> validate_required([:name, :username, :balance])
+    |> validate_required([:name, :username])
     |> validate_number(:balance, greater_than_or_equal_to: 0)
     |> unique_constraint(:username)
   end
