@@ -1,4 +1,4 @@
-<h1>All Skills in Community: </h1>
+<h1><img src="<%= Routes.static_path(@conn, "/images/allskills.png") %>" alt="all skills in community"/></h1>
 
 <table>
   <thead>

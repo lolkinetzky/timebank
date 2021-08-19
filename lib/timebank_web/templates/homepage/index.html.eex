@@ -1,6 +1,20 @@
 
-<div class="phx-hero container justify-center">
-<div class="text-5xl underline tracking-widest"><%= link "Become a Member", to: Routes.user_path(@conn, :new) %></div>
+<div class="phx-hero container">
+
+<p class="font-sans justify-start font-light">
+You've landed on a student's 'project demo.'<br>
+This humble webb app was made using the Elixir Phoenix framework.
+
+<img src="<%= Routes.static_path(@conn, "/images/tecdef.png") %>" alt="Temporary Logo"/>
+<br>
+
+  "TechTaak" is a placeholder, but can serve as a hub
+  for friends/friends-that-haven't-met-yet to collab around technology based
+  skills. Feel free to make a profile and poke around! <br>
+  Interested in a current version or personalizing this web app for your timebank?
+
+   <br>Please see the resources below, and get in touch!
+<div class="text-5xl underline tracking-widest"><%= link "demo TEChTaak", to: Routes.user_path(@conn, :new) %></div>
 
 </div>
 

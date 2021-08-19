@@ -1,4 +1,4 @@
-<h1>Communituy Skill Requests</h1>
+<h1><img src="<%= Routes.static_path(@conn, "/images/timexchange.png") %>" alt="all skill requests"/></h1>
 
 <table>
   <thead>
